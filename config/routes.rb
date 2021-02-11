@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get :challenge_1, to: 'static_pages#challenge_1'
   get :challenge_2, to: 'static_pages#challenge_2'
   get :challenge_3, to: 'static_pages#challenge_3'
+  get :ruby_challenge_1, to: 'static_pages#ruby_challenge_1'
   post :login, to: 'static_pages#login'
   get :thanks, to: 'static_pages#thanks'
+
+  resources :effects, only: [:create]
 end
