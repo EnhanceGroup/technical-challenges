@@ -17,10 +17,4 @@ class Effect < ApplicationRecord
     **PERSONAL_EFFECTS,
     **MAGICAL_EFFECTS
   }
-
-  private
-
-  def types_and_sub_types
-    raise NotImplementedError
-  end
 end

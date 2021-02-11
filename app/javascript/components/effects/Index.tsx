@@ -14,7 +14,7 @@ export default function Index({ effects }) {
   return (
     <>
       <ul>
-        {effects.length > 0 ? effects.map(renderEffect) : 'Effects list should go here'}
+        {effects.length > 0 ? effects.map(renderEffect) : 'Effects list should go here (there are some already in your database)'}
       </ul>
       <Form />
     </>
