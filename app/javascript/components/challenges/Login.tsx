@@ -5,7 +5,7 @@ export default function Login() {
 
   React.useEffect(() => {
     console.log(
-      'Once you have fixed this form and added the new functionality sign in with the email: pinpoint@email.com',
+      'Once you have fixed this form and added the new functionality sign in with the email: enhance@email.com',
     );
   });
 
