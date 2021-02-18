@@ -19,6 +19,12 @@ export default function Login() {
 
   const authToken = document.querySelector('head meta[name="csrf-token"]' as any).content;
 
+  function showPass() {
+      const pass = (document.getElementById('password') as HTMLInputElement)
+      pass.type = 'text'
+
+  }
+
   return (
     <div>
       <h1>🥈 Challenge 2</h1>
@@ -29,12 +35,12 @@ export default function Login() {
       <form method="POST" action="/login">
         <input type="hidden" name="authenticity_token" value={authToken} />
         <label htmlFor="">Email</label>
-        <input name="email" type="text" value={email} />
+        <input name="email" type="text" />
         <div style={{ color: 'red', margin: '10px 0' }}>{/* Email validation errors go here */}</div>
         <label htmlFor="">Password</label>
         <div style={{ display: 'flex', marginBottom: '20px' }}>
-          <input name="password" type="password" />
-          <button type="button">Show Password</button>
+          <input name="password" type="password" id="password"/>
+          <button type="button" onClick={showPass}>Show Password</button>
         </div>
         <button style={buttonStyles} disabled={!email}>
           Login
