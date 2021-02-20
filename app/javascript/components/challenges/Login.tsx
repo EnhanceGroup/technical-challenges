@@ -1,7 +1,9 @@
 import * as React from 'react';
+import validator from 'validator'
 
 export default function Login() {
   const [email, setEmail] = React.useState<string>('');
+  const [emailError, setEmailError] = React.useState<string>('');
 
   React.useEffect(() => {
     console.log(
@@ -22,7 +24,16 @@ export default function Login() {
   function showPass() {
       const pass = (document.getElementById('password') as HTMLInputElement)
       pass.type = 'text'
+  }
 
+  function validateEmail(e) {
+      const email = e.target.value
+      if (validator.isEmail(email)) {
+        setEmail(email)
+          setEmailError('')
+    } else {
+      setEmailError('Please Enter A Valid Email')
+    }
   }
 
   return (
@@ -35,8 +46,8 @@ export default function Login() {
       <form method="POST" action="/login">
         <input type="hidden" name="authenticity_token" value={authToken} />
         <label htmlFor="">Email</label>
-        <input name="email" type="text" />
-        <div style={{ color: 'red', margin: '10px 0' }}>{/* Email validation errors go here */}</div>
+        <input name="email" type="text" id='email' onChange={(e) => validateEmail(e)}/>
+        <div style={{ color: 'red', margin: '10px 0' }}>{emailError}</div>
         <label htmlFor="">Password</label>
         <div style={{ display: 'flex', marginBottom: '20px' }}>
           <input name="password" type="password" id="password"/>
