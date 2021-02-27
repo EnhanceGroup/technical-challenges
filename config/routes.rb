@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post :login, to: 'static_pages#login'
   get :thanks, to: 'static_pages#thanks'
 
-  resources :effects, only: [:index]
+  resources :effects, only: [:index, :show, :create]
 end

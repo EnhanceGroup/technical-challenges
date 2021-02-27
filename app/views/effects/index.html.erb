@@ -1,4 +1,6 @@
+<% @effects -%>
 <div>
-  <%= react_component 'effects/Description' %>
-  <%= react_component 'effects/Index' %>
+  <%= react_component "effects/Description" %>
+  <%= react_component "effects/Index", {effects: @effects} %>
 </div>
+

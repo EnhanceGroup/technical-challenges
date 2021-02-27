@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Form from './index/Form';
 
+
 interface IEffectProps {
   effects: IEffect[]
 }
@@ -14,7 +15,9 @@ interface IEffect {
 }
 
 export default function Index({ effects }: IEffectProps) {
+  console.log(effects)
   const renderEffect = (effect: IEffect) => {
+
     return(
       <li key={effect.id}>
         {`${effect.name} | type: ${effect.effect_type} | sub_type: ${effect.sub_type}`}
