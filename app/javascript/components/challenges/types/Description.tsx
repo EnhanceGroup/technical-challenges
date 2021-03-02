@@ -1,7 +1,12 @@
 import * as React from 'react';
+import {Dispatch, useEffect, useState} from "react";
 
-export default function Description(props) {
-  const { showDescription, handleDescriptionToggle } = props;
+export default function Description(props: {showDescription :boolean}) {
+  const [ showDescription, handleDescriptionToggle ] = useState(props.showDescription);
+
+  useEffect(() =>{
+      console.log(showDescription)
+  }, [showDescription])
 
   const initialDescription: React.ReactFragment = (
     <>
@@ -21,7 +26,7 @@ export default function Description(props) {
   )
 
   const showNextSteps = (
-    <button type="button" onClick={handleDescriptionToggle} >
+    <button type="button" onClick={()=>handleDescriptionToggle(prevState => !prevState)} >
       Show next steps
     </button>
   )
@@ -36,5 +41,4 @@ export default function Description(props) {
 
 Description.defaultProps = {
   showDescription: false,
-  handleDescription: null,
 }

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {useEffect} from "react";
 
-
 export default function Cards() {
   const nasaApiKey = '6H6EdNLLrDu8SC1LZMJkbJzoGIghjvrjzgQpF72W';
   const baseUri = 'https://api.nasa.gov/planetary/apod';
 
-  const [images, setImages] = React.useState([]);
+  const [images, setImages] = React.useState(['']);
   const [imageIndex, setImageIndex] = React.useState(0)
   const [randomIndex, setRandomIndex] = React.useState(0)
 
@@ -15,7 +14,7 @@ export default function Cards() {
   const dates = ['2020-02-13', '2020-02-12', '2020-02-02', '2020-02-01']
 
   function getRandomImage(){
-    let index;
+    let index: number = 0
     let same = true
     while (same) {
         index = Math.floor(Math.random() * images.length)
@@ -45,7 +44,7 @@ export default function Cards() {
   }
 
   const getImages = () => {
-      const arr = []
+      const arr: string[] = []
       dates.map(date =>
           getImage(date).then(response => arr.push(response)).then(()=>setImages(arr)))
   }
@@ -53,9 +52,6 @@ export default function Cards() {
   useEffect(() => {
 
       getImages()
-
-
-
 
   }, []);
 

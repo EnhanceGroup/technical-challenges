@@ -2,17 +2,18 @@ import * as React from 'react';
 
 import Select from 'react-select';
 import {useEffect, useState} from "react";
-
+import {string} from "prop-types";
 
 export default function Form() {
   const defaultOption = { label: '', value: '' };
+  const mainObjDefault = { effect: ['subType']};
 
   const [name, setName] = React.useState('');
   const [effectTypeOption, setEffectTypeOption] = React.useState(defaultOption);
   const [subTypeOption, setSubTypeOption] = React.useState(defaultOption);
-  const [effectTypeOptions, setEffectTypeOptions] = useState([])
-  const [subTypeOptions, setSubTypeOptions] = useState([])
-  const [mainObject, setMainObject] = useState({})
+  const [effectTypeOptions, setEffectTypeOptions] = useState([defaultOption])
+  const [subTypeOptions, setSubTypeOptions] = useState([defaultOption])
+  const [mainObject, setMainObject] = useState(mainObjDefault)
 
   const authToken = document.querySelector('head meta[name="csrf-token"]' as any).content;
 
@@ -27,14 +28,15 @@ export default function Form() {
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value);
 
-  const handleEffectChange = (event) => {
-    const chosenEffect = event.value
-    console.log(chosenEffect)
-    console.log(mainObject)
+  interface EventInterface{
+    label:string,
+    value: string
+  }
+
+  const handleEffectChange = (event :EventInterface) => {
+    const chosenEffect :keyof typeof mainObject = event.value
     const options = mainObject[chosenEffect]
-    console.log(options)
     const formattedOptions = options.map(((val) => {return {label: capitalizeFirstLetter(val), value: val}}))
-    console.log(formattedOptions)
     setSubTypeOptions(formattedOptions)
     for (var i = 0; i< effectTypeOptions.length;i++) {
       const effect = effectTypeOptions[i]
@@ -45,7 +47,7 @@ export default function Form() {
     }
   }
 
-  const handleSubTypeChange = (event) => {
+  const handleSubTypeChange = (event :{label:string, value:string}) => {
     const chosenSubType = event.value
     for (var i = 0; i< subTypeOptions.length; i++) {
       const subType = subTypeOptions[i]
@@ -66,11 +68,12 @@ export default function Form() {
     }
 
 
-  function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1);
+  function capitalizeFirstLetter(word :string) {
+  return word[0].toUpperCase() + word.slice(1);
   }
 
-  async function getEffectTypes(){
+
+  function getEffectTypes(){
     fetch('/effects/effect_types')
         .then(response => response.json())
         .then(response => {
@@ -98,10 +101,10 @@ export default function Form() {
         <input name="effect[name]" id="effect_name" type="text" value={name} onChange={handleNameChange}/>
         <input type="hidden" name="effect[effect_type]" id="effect_type" value={effectTypeOption.value} />
         <label htmlFor="">Type</label>
-        <Select options={effectTypeOptions} onChange={handleEffectChange}/>
+        <Select options={effectTypeOptions} onChange={(e)=>handleEffectChange(e)}/>
         <input type="hidden" name="effect[sub_type]" id="effect_sub_type" value={subTypeOption.value} />
         <label htmlFor="">Sub Type</label>
-        <Select options={subTypeOptions} onChange={handleSubTypeChange}/>
+        <Select options={subTypeOptions} onChange={(e)=>handleSubTypeChange(e)}/>
         <button style={buttonStyles}>
           Submit
         </button>

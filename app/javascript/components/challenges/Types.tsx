@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Description from './types/Description';
-
+import TaskList from './types/TaskList'
 export default function Types() {
 
   const [showDescription, SetShowDesciption] = React.useState(false);
@@ -13,6 +13,7 @@ export default function Types() {
     <>
       <h1>You're not my Type</h1>
       <Description  />
+      <TaskList />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import validator from 'validator'
+import validator from 'validator';
 
 export default function Login() {
   const [email, setEmail] = React.useState<string>('');
@@ -26,8 +26,8 @@ export default function Login() {
       pass.type = 'text'
   }
 
-  function validateEmail(e) {
-      const email = e.target.value
+  function validateEmail(event :React.ChangeEvent<HTMLInputElement>) {
+      const email = event.target.value
       if (validator.isEmail(email)) {
         setEmail(email)
           setEmailError('')
