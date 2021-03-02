@@ -21,7 +21,6 @@ export default function Cards() {
         if (index !== randomIndex){
             same = false
         }
-
     }
     setRandomIndex(index)
   }
