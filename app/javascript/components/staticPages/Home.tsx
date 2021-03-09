@@ -4,11 +4,13 @@ export default function Home({ linkPath }: { linkPath: string }) {
   const [isTextVisible, setIsTextVisible] = React.useState<boolean>(false);
 
   function handleClick() {
-    if (!linkPath) {
+    /*if (!linkPath) {
       alert("Just kidding this doesn't work");
     } else {
-      window.location.href = linkPath;
-    }
+      window.location.href = "/challenge_1";
+    }*/
+    window.location.href = "/challenge_1";
+    
   }
 
   React.useEffect(() => {

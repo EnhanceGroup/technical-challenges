@@ -2,12 +2,43 @@ import * as React from 'react';
 
 export default function Login() {
   const [email, setEmail] = React.useState<string>('');
-
+  const [valEmail, validateEmail] = React.useState<string>('');
+  const [btnText, setbtnText] = React.useState<string>('Show Password');
   React.useEffect(() => {
     console.log(
       'Once you have fixed this form and added the new functionality sign in with the email: enhance@email.com',
     );
   });
+
+
+  function emailValidate(){
+    var address = document.getElementById("email");
+    validateEmail('');
+    setEmail(address.value);
+   }
+
+  function isValidEmailAddress(address) {
+    var emailformat = /.+@.+/
+  if (email.match(emailformat)){
+    return true
+  }
+    validateEmail("Enter valid mail");
+    return(false)
+  }
+
+  function showhidePassword(){
+    var x = document.getElementById("password");
+
+    if (x.type === "password") {
+      x.type = "text"
+      setbtnText ("Hide Password");
+    }
+    else {
+      x.type = "password";
+      setbtnText ("Show Password");
+    }
+  }
+
 
   const buttonStyles: React.CSSProperties = {
     backgroundColor: 'green',
@@ -29,12 +60,12 @@ export default function Login() {
       <form method="POST" action="/login">
         <input type="hidden" name="authenticity_token" value={authToken} />
         <label htmlFor="">Email</label>
-        <input name="email" type="text" value={email} />
-        <div style={{ color: 'red', margin: '10px 0' }}>{/* Email validation errors go here */}</div>
+        <input name="email" id="email" type="text" value={email} onChange={() =>emailValidate()} onBlur={() => isValidEmailAddress(email)}/>
+        <div style={{ color: 'red', margin: '10px 0' }}>{valEmail/* Email validation errors go here */}</div>
         <label htmlFor="">Password</label>
         <div style={{ display: 'flex', marginBottom: '20px' }}>
-          <input name="password" type="password" />
-          <button type="button">Show Password</button>
+          <input name="password" id="password" type="password" />
+          <button type="button" onClick={ () =>showhidePassword()}>{btnText}</button>
         </div>
         <button style={buttonStyles} disabled={!email}>
           Login
